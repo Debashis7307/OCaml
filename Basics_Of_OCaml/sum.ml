@@ -1,5 +1,4 @@
 (*Use case of Patern Matching*)
-
 let rec sum = function
 |[]-> 0
 |h::t -> h+ sum t;;
