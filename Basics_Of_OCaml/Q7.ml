@@ -14,3 +14,15 @@ let sing x =
 let _ = assert (sing 0 = 0)
 let _ = assert (sing (-5) = -1)
 let _ = assert (sing 32= 1)
+
+
+let pi = 3.1415;;
+let circle r =
+  pi *. r *. r;; 
+
+let close_enough a b =
+  Float.abs (a -. b) < 1e-5
+let _ = assert (close_enough (circle 1.0) pi)
+let _ = assert (close_enough (circle (Float.sqrt (1. /. pi))) 1.)
+
+let ave x y z = (x +. y +. z)/. 3.;;
