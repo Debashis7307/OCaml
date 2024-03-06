@@ -23,3 +23,7 @@ let rec append lst1 lst2 =
   |[]-> lst2
   |h::t -> h :: append t lst2;;
 (* there is a build in function for append is  "@"*)
+
+(*creat a function to check wheather the list length is correct or not*)
+let is_length lst n =
+  List.length lst = n;;
