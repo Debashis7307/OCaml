@@ -13,7 +13,7 @@ let rec concat =function
 |[]->" "
 |h::t -> h ^ concat t
 
-(* * unit test *)
+(* *   unit test *)
 assert(product l1 = 120)
 
 (* * exercise: patterns *)
