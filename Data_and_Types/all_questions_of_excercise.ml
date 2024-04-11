@@ -21,6 +21,7 @@ let rec find = function
 |[]->false 
 |h::t->if h="bigred" then true else false 
 
+
 let rec two_four = function 
 |_::_::[] -> true
 |_::_::_::_::[] -> true
