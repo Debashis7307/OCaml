@@ -180,9 +180,10 @@ let t =
     | _ -> false
 
 (* * exercise: list max exn *)
-let rec max_list acc = function 
-|[]-> failwith "can't be possible"
-|h::t -> 
+let rec max_list = function 
+|[]-> raise(Failure "can't be possible") 
+|[n]->n
+|h1::h2::t -> if h1>h2 then max_list (h1::t) else max_list(h2::t)
 
   (* * exercise: quadrant poly *)
   let sign_poly x : [> `Neg | `Pos | `Zero] =
