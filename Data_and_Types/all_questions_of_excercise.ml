@@ -134,4 +134,66 @@ let queen_of_hearts : card = { suit = Hearts; rank = Queen }
 let two_of_diamonds : card = { suit = Diamonds; rank = Number 2 }
 let seven_of_spades : card = { suit = Spades; rank = Number 7 }
 
-(* * exercise: matching *)
+(* * exercise: quadrant *)
+type sqad = I |II |III |IV 
+type sing = Pos | Zero | Neg 
+let sin x = if x=0 then Zero else if x<0 then Neg else Pos
+let quaderent (x,y) =
+  match sin x , sin y with
+  |Pos,Pos->Some I
+  |Neg,Pos->Some II
+  |Neg,Neg->Some III
+  |Pos,Neg->Some IV
+  |_->None
+
+
+(* * exercise: quadrant when  *)
+let quadrant_when = function
+  | x,y when x > 0 && y > 0 -> Some I
+  | x,y when x < 0 && y > 0 -> Some II
+  | x,y when x < 0 && y < 0 -> Some III
+  | x,y when x > 0 && y < 0 -> Some IV
+  | _ -> None
+
+(* * exercise: depth *)
+type 'a tree = Leaf | Node of 'a * 'a tree * 'a tree 
+let rec defth = function 
+|Leaf -> 0
+|Node(_,left,right) -> 1+ max (defth left) (defth right)
+let t =
+  Node(4,
+    Node(2,
+      Node(1, Leaf, Leaf),
+      Node(3, Leaf, Leaf)
+    ),
+    Node(5,
+      Node(6, Leaf, Leaf),
+      Node(7, Leaf, Leaf)
+    )
+  );;
+
+  (* * exercise: shape *)
+  let rec same_shape t1 t2 =
+    match t1, t2 with
+    | Leaf, Leaf -> true
+    | Node (_,l1,r1), Node (_,l2,r2) -> (same_shape l1 l2) && (same_shape r1 r2)
+    | _ -> false
+
+(* * exercise: list max exn *)
+let rec max_list acc = function 
+|[]-> failwith "can't be possible"
+|h::t -> 
+
+  (* * exercise: quadrant poly *)
+  let sign_poly x : [> `Neg | `Pos | `Zero] =
+    if x < 0 then `Neg
+    else if x = 0 then `Zero
+    else `Pos
+  
+  let quadrant (x,y) : [> `I | `II | `III | `IV ] option =
+    match sign_poly x, sign_poly y with
+    | `Pos, `Pos -> Some `I
+    | `Neg, `Pos -> Some `II
+    | `Neg, `Neg -> Some `III
+    | `Pos, `Neg -> Some `IV
+    | _ -> None
