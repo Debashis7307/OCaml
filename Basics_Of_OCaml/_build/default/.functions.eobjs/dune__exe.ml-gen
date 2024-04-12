@@ -12,6 +12,51 @@ module Increment = Dune__exe__Increment
 (** @canonical Dune__exe.Print_line *)
 module Print_line = Dune__exe__Print_line
 
+(** @canonical Dune__exe.Q1 *)
+module Q1 = Dune__exe__Q1
+
+(** @canonical Dune__exe.Q10 *)
+module Q10 = Dune__exe__Q10
+
+(** @canonical Dune__exe.Q11 *)
+module Q11 = Dune__exe__Q11
+
+(** @canonical Dune__exe.Q12 *)
+module Q12 = Dune__exe__Q12
+
+(** @canonical Dune__exe.Q13 *)
+module Q13 = Dune__exe__Q13
+
+(** @canonical Dune__exe.Q14 *)
+module Q14 = Dune__exe__Q14
+
+(** @canonical Dune__exe.Q15 *)
+module Q15 = Dune__exe__Q15
+
+(** @canonical Dune__exe.Q2 *)
+module Q2 = Dune__exe__Q2
+
+(** @canonical Dune__exe.Q3 *)
+module Q3 = Dune__exe__Q3
+
+(** @canonical Dune__exe.Q4 *)
+module Q4 = Dune__exe__Q4
+
+(** @canonical Dune__exe.Q5 *)
+module Q5 = Dune__exe__Q5
+
+(** @canonical Dune__exe.Q6 *)
+module Q6 = Dune__exe__Q6
+
+(** @canonical Dune__exe.Q7 *)
+module Q7 = Dune__exe__Q7
+
+(** @canonical Dune__exe.Q8 *)
+module Q8 = Dune__exe__Q8
+
+(** @canonical Dune__exe.Q9 *)
+module Q9 = Dune__exe__Q9
+
 (** @canonical Dune__exe.Sum *)
 module Sum = Dune__exe__Sum
 
