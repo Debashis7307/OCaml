@@ -1,0 +1,139 @@
+─( 06:12:04 )─< command 0 >───────────────────────────────────────────────────────────────────────────────────────────{ counter: 0 }─
+utop # struct
+  let inc x = x + 1
+  type primary_color = Red | Green | Blue
+  exception Oops
+end;;
+Error: Syntax error
+─( 06:12:04 )─< command 1 >───────────────────────────────────────────────────────────────────────────────────────────{ counter: 0 }─
+utop # module MyModule = struct
+  let inc x = x + 1
+  type primary_color = Red | Green | Blue
+  exception Oops
+end;;
+module MyModule :
+  sig
+    val inc : int -> int
+    type primary_color = Red | Green | Blue
+    exception Oops
+  end
+─( 06:19:25 )─< command 2 >───────────────────────────────────────────────────────────────────────────────────────────{ counter: 0 }─
+utop # module ListStack = struct
+  (** [empty] is the empty stack. *)
+  let empty = []
+
+  (** [is_empty s] is whether [s] is empty. *)
+  let is_empty = function [] -> true | _ -> false
+
+  (** [push x s] pushes [x] onto the top of [s]. *)
+  let push x s = x :: s
+
+  (** [Empty] is raised when an operation cannot be applied
+      to an empty stack. *)
+  exception Empty
+
+  (** [peek s] is the top element of [s].
+      Raises [Empty] if [s] is empty. *)
+  let peek = function
+    | [] -> raise Empty
+    | x :: _ -> x
+
+  (** [pop s] is all but the top element of [s].
+      Raises [Empty] if [s] is empty. *)
+  let pop = function
+    | [] -> raise Empty
+    | _ :: s -> s
+end;;
+module ListStack :
+  sig
+    val empty : 'a list
+    val is_empty : 'a list -> bool
+    val push : 'a -> 'a list -> 'a list
+    exception Empty
+    val peek : 'a list -> 'a
+    val pop : 'a list -> 'a list
+  end
+─( 06:26:56 )─< command 3 >───────────────────────────────────────────────────────────────────────────────────────────{ counter: 0 }─
+utop # ListStack.push 2 (ListStack.push 1 ListStack.empty);;
+- : int list = [2; 1]
+─( 06:35:57 )─< command 4 >───────────────────────────────────────────────────────────────────────────────────────────{ counter: 0 }─
+utop # ListStack.(push 2 (push 1 empty));;
+- : int list = [2; 1]
+─( 06:44:50 )─< command 5 >───────────────────────────────────────────────────────────────────────────────────────────{ counter: 0 }─
+utop # empty |> push(5)|>push(10)|>push(15);;
+Error: Unbound value push
+─( 06:45:23 )─< command 6 >───────────────────────────────────────────────────────────────────────────────────────────{ counter: 0 }─
+utop # open ListStack;;
+─( 06:46:37 )─< command 7 >───────────────────────────────────────────────────────────────────────────────────────────{ counter: 0 }─
+utop # empty |> push(5)|>push(10)|>push(15);;
+- : int list = [15; 10; 5]
+─( 06:47:03 )─< command 8 >───────────────────────────────────────────────────────────────────────────────────────────{ counter: 0 }─
+utop # module M = struct
+  let x = 0;;
+  assert (x = 0);;
+end;;
+module M : sig val x : int end
+─( 06:47:07 )─< command 9 >───────────────────────────────────────────────────────────────────────────────────────────{ counter: 0 }─
+utop # module M = struct
+  (* Requires: input is non-negative. *)
+  let rec even = function
+    | 0 -> true
+    | n -> odd (n - 1)
+  and odd = function
+    | 0 -> false
+    | n -> even (n - 1)
+end;;
+module M : sig val even : int -> bool val odd : int -> bool end
+─( 07:00:01 )─< command 10 >──────────────────────────────────────────────────────────────────────────────────────────{ counter: 0 }─
+utop # open M;;
+─( 07:08:14 )─< command 11 >──────────────────────────────────────────────────────────────────────────────────────────{ counter: 0 }─
+utop # M.even 32;;
+- : bool = true
+─( 07:08:37 )─< command 12 >──────────────────────────────────────────────────────────────────────────────────────────{ counter: 0 }─
+utop # M.even 31;;
+- : bool = false
+─( 07:08:48 )─< command 13 >──────────────────────────────────────────────────────────────────────────────────────────{ counter: 0 }─
+utop # M.odd 31;;
+- : bool = true
+─( 07:08:52 )─< command 14 >──────────────────────────────────────────────────────────────────────────────────────────{ counter: 0 }─
+utop # open M;;
+─( 07:09:00 )─< command 15 >──────────────────────────────────────────────────────────────────────────────────────────{ counter: 0 }─
+utop # even 34;;
+- : bool = true
+─( 07:11:54 )─< command 16 >──────────────────────────────────────────────────────────────────────────────────────────{ counter: 0 }─
+utop # M.odd 893;;
+- : bool = true
+─( 07:12:02 )─< command 17 >──────────────────────────────────────────────────────────────────────────────────────────{ counter: 0 }─
+utop # M.(even 23;odd 34);;
+Line 1, characters 3-10:
+Warning 10 [non-unit-statement]: this expression should have type unit.
+Line 1, characters 3-10:
+Warning 10 [non-unit-statement]: this expression should have type unit.
+- : bool = false
+─( 07:12:18 )─< command 18 >──────────────────────────────────────────────────────────────────────────────────────────{ counter: 0 }─
+utop # (** [lower_trim s] is [s] in lower case with whitespace removed. *)
+let lower_trim s =
+  let open String in
+  s |> trim |> lowercase_ascii;;
+val lower_trim : string -> string = <fun>
+─( 07:12:57 )─< command 19 >──────────────────────────────────────────────────────────────────────────────────────────{ counter: 0 }─
+utop # lower_trim "  retwt  tewr twe etw  ";;
+- : string = "retwt  tewr twe etw"
+─( 07:15:37 )─< command 20 >──────────────────────────────────────────────────────────────────────────────────────────{ counter: 0 }─
+utop # module type LIST_STACK = sig
+  exception Empty
+  val empty : 'a list
+  val is_empty : 'a list -> bool
+  val push : 'a -> 'a list -> 'a list
+  val peek : 'a list -> 'a
+  val pop : 'a list -> 'a list
+end;;
+module type LIST_STACK =
+  sig
+    exception Empty
+    val empty : 'a list
+    val is_empty : 'a list -> bool
+    val push : 'a -> 'a list -> 'a list
+    val peek : 'a list -> 'a
+    val pop : 'a list -> 'a list
+  end
